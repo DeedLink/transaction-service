@@ -10,6 +10,7 @@ const transactionSchema = new mongoose.Schema({
   type: { type: String, enum: ["gift", "open_market", "direct_transfer", "closed", "init"], required: true },
   date: { type: Date, default: Date.now },
   description: { type: String },
+  share: { type: Number, default: 100 },
 });
 
 const Transaction = mongoose.model("Transaction", transactionSchema);
