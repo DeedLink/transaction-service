@@ -1,16 +1,16 @@
 import mongoose from "mongoose";
 
 const transactionSchema = new mongoose.Schema({
+  deedId: { type: String, required: true },
   from: { type: String, required: true },
   to: { type: String, required: true },
-  status: { type: String, enum: ['pending', 'completed', 'failed'], default: 'pending' },
+  status: { type: String, enum: ["pending", "completed", "failed"], default: "pending" },
   hash: { type: String, required: true },
   amount: { type: Number, required: true },
-  type: { type: String, enum: ['gift', 'open_market', 'direct_transfer', 'closed', 'init'], required: true },
+  type: { type: String, enum: ["gift", "open_market", "direct_transfer", "closed", "init"], required: true },
   date: { type: Date, default: Date.now },
-  description: { type: String }
+  description: { type: String },
 });
 
 const Transaction = mongoose.model("Transaction", transactionSchema);
-
 export default Transaction;

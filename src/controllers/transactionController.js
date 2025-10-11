@@ -79,3 +79,13 @@ export const getTransactionsByUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getTransactionsByDeed = async (req, res) => {
+  try {
+    const { deedId } = req.params;
+    const transactions = await Transaction.find({ deedId }).sort({ date: -1 });
+    res.status(200).json(transactions);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

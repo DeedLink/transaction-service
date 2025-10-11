@@ -1,5 +1,5 @@
 import express from "express";
-import { createTransaction, deleteTransaction, getAllTransactions, getTransactionById, getTransactionsByStatus, getTransactionsByUser, updateTransaction } from "../controllers/transactionController.js";
+import { createTransaction, deleteTransaction, getAllTransactions, getTransactionById, getTransactionsByDeed, getTransactionsByStatus, getTransactionsByUser, updateTransaction } from "../controllers/transactionController.js";
 
 const router = express.Router();
 
@@ -12,5 +12,6 @@ router.delete("/:id", deleteTransaction);
 // Additional filters
 router.get("/status/:status", getTransactionsByStatus);
 router.get("/user/:address", getTransactionsByUser);
+router.get("/deed/:deedId", getTransactionsByDeed);
 
 export default router;
