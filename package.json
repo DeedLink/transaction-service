@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "T.D Rasindu Dulshan Siriwardhana",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "license": "MIT",
     "dependencies": {
     "axios": "^1.11.0",
@@ -14,5 +20,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.0",
     "nodemailer": "^7.0.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
