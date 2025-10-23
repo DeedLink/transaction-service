@@ -6,3 +6,16 @@ services:
       - "5004:5004"
     env_file:
       - .env
+    depends_on:
+      - mongo
+    
+  mongo:
+    image: mongo:6.0
+    container_name: transaction-mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - transaction-mongo:/data/db
+
+volumes:
+  transaction-mongo-data:
