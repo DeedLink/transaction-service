@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.use("/api/transactions", transactionRoutes);
 
-const PORT = process.env.PORT || 5004;
+const PORT = process.env.PORT || 5002;
 
 app.listen(PORT, async () => {
   console.log(`✅ Transaction service running on port ${PORT}`);
