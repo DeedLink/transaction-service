@@ -15,7 +15,7 @@ services:
     ports:
       - "27018:27017"
     volumes:
-      - transaction-mongo:/data/db
+      - transaction-mongo-data:/data/db
 
 volumes:
   transaction-mongo-data:
