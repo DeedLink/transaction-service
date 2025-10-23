@@ -39,7 +39,7 @@ jobs:
         echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> transaction-service/.env
         echo "EMAIL_USER=${{ secrets.EMAIL_USER }}" >> transaction-service/.env
         echo "EMAIL_PASS=${{ secrets.EMAIL_PASS }}" >> transaction-service/.env
-        echo "PORT=5002" >> transaction-service/.env
+        echo "PORT=5004" >> transaction-service/.env
 
     - name: Run Docker Compose
       run: |
@@ -81,7 +81,7 @@ jobs:
           echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
           echo "EMAIL_USER=${{ secrets.EMAIL_USER }}" >> .env
           echo "EMAIL_PASS=${{ secrets.EMAIL_PASS }}" >> .env
-          echo "PORT=5002" >> .env
+          echo "PORT=5004" >> .env
 
           docker compose pull
           docker compose up -d --remove-orphans
