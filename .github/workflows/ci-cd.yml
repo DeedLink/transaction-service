@@ -96,4 +96,5 @@ jobs:
           echo "PORT=5004" >> .env
 
           docker compose pull
+          docker compose down
           docker compose up -d --remove-orphans

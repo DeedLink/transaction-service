@@ -1,6 +1,6 @@
 services:
   app:
-    build: .
+    image: rasindudulshansiriwardhana/transaction-service:latest
     container_name: transaction-service
     ports:
       - "5004:5004"
