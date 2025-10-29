@@ -49,9 +49,10 @@ export const updateTransaction = async (req, res) => {
 
 export const updateStatus = async (req, res) => {
   try {
+    const { status } = req.body;
     const updatedTransaction = await Transaction.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      { status },
       { new: true, runValidators: true }
     );
     if (!updatedTransaction) {
@@ -62,6 +63,7 @@ export const updateStatus = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
 
 export const deleteTransaction = async (req, res) => {
   try {

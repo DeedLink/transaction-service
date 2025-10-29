@@ -1,5 +1,5 @@
 import express from "express";
-import { createTransaction, deleteTransaction, getAllTransactions, getTransactionById, getTransactionsByDeed, getTransactionsByStatus, getTransactionsByUser, updateTransaction } from "../controllers/transactionController.js";
+import { createTransaction, deleteTransaction, getAllTransactions, getTransactionById, getTransactionsByDeed, getTransactionsByStatus, getTransactionsByUser, updateStatus, updateTransaction } from "../controllers/transactionController.js";
 
 const router = express.Router();
 
@@ -15,5 +15,6 @@ router.get("/user/:address", getTransactionsByUser);
 router.get("/deed/:deedId", getTransactionsByDeed);
 
 // Partial Updates
+router.post("/:id", updateStatus);
 
 export default router;
