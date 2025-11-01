@@ -52,7 +52,7 @@ export const updateStatus = async (req, res) => {
     const { status } = req.body;
 
     const updatedTransaction = await Transaction.findOneAndUpdate(
-      { hash: req.params.hash },
+      { blockchain_identification: req.params.blockchain_identification },
       { status },
       { new: true, runValidators: true }
     );

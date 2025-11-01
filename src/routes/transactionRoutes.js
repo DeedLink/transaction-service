@@ -15,6 +15,6 @@ router.get("/user/:address", getTransactionsByUser);
 router.get("/deed/:deedId", getTransactionsByDeed);
 
 // Partial Updates
-router.post("/status/:hash", updateStatus);
+router.post("/status/:blockchain_identification", updateStatus);
 
 export default router;
