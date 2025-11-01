@@ -50,19 +50,23 @@ export const updateTransaction = async (req, res) => {
 export const updateStatus = async (req, res) => {
   try {
     const { status } = req.body;
-    const updatedTransaction = await Transaction.findByIdAndUpdate(
-      req.params.id,
+
+    const updatedTransaction = await Transaction.findOneAndUpdate(
+      { hash: req.params.hash },
       { status },
       { new: true, runValidators: true }
     );
+
     if (!updatedTransaction) {
       return res.status(404).json({ message: "Transaction not found" });
     }
+
     res.status(200).json(updatedTransaction);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
+
 
 
 export const deleteTransaction = async (req, res) => {
