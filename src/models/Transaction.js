@@ -11,7 +11,8 @@ const transactionSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now },
   description: { type: String },
   share: { type: Number, default: 100 },
-});
+}, { timestamps: true });
 
 const Transaction = mongoose.model("Transaction", transactionSchema);
 export default Transaction;
+``
