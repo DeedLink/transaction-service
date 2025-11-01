@@ -15,6 +15,6 @@ router.get("/user/:address", getTransactionsByUser);
 router.get("/deed/:deedId", getTransactionsByDeed);
 
 // Partial Updates
-router.post("/:id", updateStatus);
+router.post("/status/:id", updateStatus);
 
 export default router;
