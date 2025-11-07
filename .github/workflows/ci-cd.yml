@@ -51,6 +51,8 @@ jobs:
         echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> transaction-service/.env
         echo "EMAIL_USER=${{ secrets.EMAIL_USER }}" >> transaction-service/.env
         echo "EMAIL_PASS=${{ secrets.EMAIL_PASS }}" >> transaction-service/.env
+        echo "RABBITMQ_URL=${{ secrets.RABBITMQ_URL }}" >> transaction-service/.env
+        echo "QUEUE_NAME=${{ secrets.QUEUE_NAME }}" >> transaction-service/.env
         echo "PORT=5004" >> transaction-service/.env
 
     - name: Run Docker Compose
@@ -93,6 +95,8 @@ jobs:
           echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
           echo "EMAIL_USER=${{ secrets.EMAIL_USER }}" >> .env
           echo "EMAIL_PASS=${{ secrets.EMAIL_PASS }}" >> .env
+          echo "RABBITMQ_URL=${{ secrets.RABBITMQ_URL }}" >> transaction-service/.env
+          echo "QUEUE_NAME=${{ secrets.QUEUE_NAME }}" >> transaction-service/.env
           echo "PORT=5004" >> .env
 
           docker compose pull
