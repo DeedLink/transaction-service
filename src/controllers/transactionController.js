@@ -1,9 +1,15 @@
 import Transaction from "../models/Transaction.js";
+import { publishTransaction } from "../mQ/transactionProducer.js";
 
 export const createTransaction = async (req, res) => {
   try {
     const transaction = new Transaction(req.body);
     const savedTransaction = await transaction.save();
+
+    await publishTransaction(
+      transaction,
+      "transaction_created"
+    );
     res.status(201).json(savedTransaction);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -61,6 +67,10 @@ export const updateStatus = async (req, res) => {
       return res.status(404).json({ message: "Transaction not found" });
     }
 
+    await publishTransaction(
+      updatedTransaction,
+      "transaction_status_updated"
+    );
     res.status(200).json(updatedTransaction);
   } catch (error) {
     res.status(400).json({ message: error.message });
