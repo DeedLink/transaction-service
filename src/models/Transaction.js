@@ -3,7 +3,10 @@ import mongoose from "mongoose";
 const transactionSchema = new mongoose.Schema({
   deedId: { type: String, required: true },
   from: { type: String, required: true },
-  to: { type: String, required: true },
+  to: { type: String, required: function() { 
+      return this.type !== "open_market"; 
+    }
+  },
   status: { type: String, enum: ["pending", "completed", "failed"], default: "pending" },
   hash: { type: String, required: false },
   blockchain_identification: { type: String, required: false },
