@@ -4,6 +4,9 @@ import { publishTransaction } from "../mQ/transactionProducer.js";
 export const createTransaction = async (req, res) => {
   try {
     const transaction = new Transaction(req.body);
+    if (transaction.type === "init") {
+      transaction.status = "init";
+    }
     const savedTransaction = await transaction.save();
 
     await publishTransaction(
