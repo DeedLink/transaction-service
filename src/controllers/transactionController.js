@@ -1,5 +1,6 @@
 import Transaction from "../models/Transaction.js";
 import { publishTransaction } from "../mQ/transactionProducer.js";
+import { sendToQueue } from "../utils/producer.js";
 
 export const createTransaction = async (req, res) => {
   try {
@@ -9,10 +10,46 @@ export const createTransaction = async (req, res) => {
     }
     const savedTransaction = await transaction.save();
 
+    // Publish to existing transaction events queue (for other services)
     await publishTransaction(
       transaction,
       "transaction_created"
     );
+
+    // Send email notification for buyer (especially for escrow transactions)
+    // Run in background so transaction creation doesn't fail if RabbitMQ is down
+    (async () => {
+      try {
+        // Only send notifications for transactions with a buyer (to field)
+        // Especially important for escrow_sale transactions
+        if (savedTransaction.to && (savedTransaction.type === "escrow_sale" || savedTransaction.type === "sale_transfer" || savedTransaction.type === "direct_transfer")) {
+          // Convert Mongoose document to plain object for RabbitMQ
+          const transactionObject = savedTransaction.toObject ? savedTransaction.toObject() : savedTransaction;
+          
+          const payload = {
+            buyerWalletAddress: savedTransaction.to,
+            sellerWalletAddress: savedTransaction.from,
+            transaction: transactionObject,
+            transactionType: savedTransaction.type,
+            time: new Date().toISOString()
+          };
+
+          console.log("Preparing to send transaction notification for:", savedTransaction._id);
+          console.log("Buyer wallet address:", savedTransaction.to);
+          console.log("Transaction type:", savedTransaction.type);
+          
+          await sendToQueue(payload);
+          console.log("Transaction notification sent to queue successfully");
+        } else {
+          console.log("Skipping notification - transaction type:", savedTransaction.type, "or missing buyer address");
+        }
+      } catch (notificationError) {
+        // Log but don't fail transaction creation
+        console.error("Failed to send transaction notification (non-critical):", notificationError.message);
+        console.error("Notification error stack:", notificationError.stack);
+      }
+    })();
+
     res.status(201).json(savedTransaction);
   } catch (error) {
     res.status(400).json({ message: error.message });

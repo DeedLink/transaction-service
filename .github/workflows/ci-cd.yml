@@ -51,6 +51,11 @@ jobs:
         echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> transaction-service/.env
         echo "EMAIL_USER=${{ secrets.EMAIL_USER }}" >> transaction-service/.env
         echo "EMAIL_PASS=${{ secrets.EMAIL_PASS }}" >> transaction-service/.env
+        echo "RABBITMQ_USER=${{ secrets.RABBITMQ_USER }}" >> transaction-service/.env
+        echo "RABBITMQ_PASS=${{ secrets.RABBITMQ_PASS }}" >> transaction-service/.env
+        echo "RABBITMQ_HOST=${{ secrets.RABBITMQ_HOST }}" >> transaction-service/.env
+        echo "RABBITMQ_PORT=${{ secrets.RABBITMQ_PORT }}" >> transaction-service/.env
+        echo "RABBITMQ_QUEUE=${{ secrets.RABBITMQ_QUEUE }}" >> transaction-service/.env
         echo "RABBITMQ_URL=${{ secrets.RABBITMQ_URL }}" >> transaction-service/.env
         echo "QUEUE_NAME=${{ secrets.QUEUE_NAME }}" >> transaction-service/.env
         echo "PORT=5004" >> transaction-service/.env
@@ -95,8 +100,13 @@ jobs:
           echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
           echo "EMAIL_USER=${{ secrets.EMAIL_USER }}" >> .env
           echo "EMAIL_PASS=${{ secrets.EMAIL_PASS }}" >> .env
-          echo "RABBITMQ_URL=${{ secrets.RABBITMQ_URL }}" >> transaction-service/.env
-          echo "QUEUE_NAME=${{ secrets.QUEUE_NAME }}" >> transaction-service/.env
+          echo "RABBITMQ_USER=${{ secrets.RABBITMQ_USER }}" >> .env
+          echo "RABBITMQ_PASS=${{ secrets.RABBITMQ_PASS }}" >> .env
+          echo "RABBITMQ_HOST=${{ secrets.RABBITMQ_HOST }}" >> .env
+          echo "RABBITMQ_PORT=${{ secrets.RABBITMQ_PORT }}" >> .env
+          echo "RABBITMQ_QUEUE=${{ secrets.RABBITMQ_QUEUE }}" >> .env
+          echo "RABBITMQ_URL=${{ secrets.RABBITMQ_URL }}" >> .env
+          echo "QUEUE_NAME=${{ secrets.QUEUE_NAME }}" >> .env
           echo "PORT=5004" >> .env
 
           docker compose pull
