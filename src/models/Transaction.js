@@ -7,7 +7,7 @@ const transactionSchema = new mongoose.Schema({
       return this.type !== "open_market"; 
     }
   },
-  status: { type: String, enum: ["pending", "completed", "failed"], default: "pending" },
+  status: { type: String, enum: ["pending", "completed", "failed", "init"], default: "pending" },
   hash: { type: String, required: false },
   blockchain_identification: { type: String, required: false },
   amount: { type: Number, required: true },
